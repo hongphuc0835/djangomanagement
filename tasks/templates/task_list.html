@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'task_list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task List for {{ username }}</h1>
+            <div class="header-buttons">
+                <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+                <a href="{% url 'add_task' %}" class="btn btn-add">Add Task</a>
+            </div>
+        </header>
+
+        <!-- Thông báo -->
+        <div class="alert" id="alert"></div>
+
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Deadline</th>
+                    <th>Priority</th>
+                    <th>Time Left</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task_id, task in tasks.items %}
+                    <tr>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.description }}</td>
+                        <td>{{ task.deadline }}</td>
+                        <td>{{ task.priority }}</td>
+            
+                        <td>
+                            <span class="time-left" id="time-left-{{ task_id }}"></span>
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_task' task_id %}" class="btn btn-edit">Edit</a>
+                            <a href="{% url 'delete_task' task_id %}" class="btn btn-delete">Delete</a>
+                        </td>
+                    </tr>
+
+                    <!-- Script đếm ngược thời gian còn lại -->
+                    <script>
+                        (function() {
+                            const deadline = new Date("{{ task.deadline }}").getTime();  
+                            const taskId = "{{ task_id }}";  
+                            let countdownInterval;
+
+                            function updateCountdown() {
+                                const now = new Date().getTime();
+                                const timeLeft = deadline - now;
+
+                                if (timeLeft > 0) {
+                                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                                    document.getElementById(`time-left-${taskId}`).innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                                } else {
+                                    document.getElementById(`time-left-${taskId}`).innerText = "Deadline passed";
+                                    clearInterval(countdownInterval);  // Dừng đếm ngược khi thời gian kết thúc
+                                }
+                            }
+
+                            countdownInterval = setInterval(updateCountdown, 1000);
+                            updateCountdown();
+
+                            // Ghi lại countdownInterval vào cửa sổ để dừng đếm ngược khi trạng thái thay đổi
+                            window[`countdownInterval_${taskId}`] = countdownInterval;
+                        })();
+                    </script>
+                {% empty %}
+                    <tr>
+                        <td colspan="7">No tasks available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

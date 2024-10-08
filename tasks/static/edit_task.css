@@ -1,0 +1,73 @@
+/* Tập tin CSS cho trang Edit Task */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Màu nền nhạt */
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px; /* Độ rộng tối đa */
+    margin: 0 auto; /* Căn giữa */
+    padding: 20px;
+    background-color: #fff; /* Màu nền trắng cho container */
+    border-radius: 8px; /* Bo tròn góc */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+h1 {
+    text-align: center; /* Căn giữa tiêu đề */
+    color: #333; /* Màu chữ tối */
+}
+
+label {
+    display: block; /* Hiển thị mỗi label trên một dòng */
+    margin: 10px 0 5px; /* Khoảng cách giữa label và input */
+    font-weight: bold; /* Đậm */
+}
+
+input[type="text"],
+input[type="datetime-local"],
+select,
+textarea {
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    padding: 10px; /* Khoảng cách bên trong */
+    margin-bottom: 15px; /* Khoảng cách dưới mỗi input */
+    border: 1px solid #ccc; /* Viền xám */
+    border-radius: 4px; /* Bo tròn góc */
+    box-sizing: border-box; /* Bao gồm padding và border trong chiều rộng */
+}
+
+textarea {
+    height: 100px; /* Chiều cao cố định cho textarea */
+}
+
+button {
+    display: inline-block; /* Hiển thị dưới dạng khối nội tuyến */
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    padding: 10px; /* Khoảng cách bên trong */
+    background-color: #5cb85c; /* Màu nền xanh */
+    color: #fff; /* Màu chữ trắng */
+    border: none; /* Không viền */
+    border-radius: 4px; /* Bo tròn góc */
+    font-size: 16px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+}
+
+button:hover {
+    background-color: #4cae4c; /* Màu nền khi hover */
+}
+
+.btn-cancel {
+    display: inline-block; /* Hiển thị dưới dạng khối nội tuyến */
+    margin-top: 10px; /* Khoảng cách trên nút hủy */
+    text-decoration: none; /* Không gạch chân */
+    color: #d9534f; /* Màu đỏ */
+    font-weight: bold; /* Đậm */
+}
+
+.btn-cancel:hover {
+    text-decoration: underline; /* Gạch chân khi hover */
+}
