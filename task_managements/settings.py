@@ -25,17 +25,14 @@ SECRET_KEY = 'django-insecure-l6)mgf^1nhu5+976id2aipcambxnzbice$%6n-+u-d88!-tox-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com']
 
-# settings.py
-import os
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_URL = '/static/'
 
+# Nếu bạn có tệp tĩnh ở một vị trí khác, hãy thêm vào đây
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'tasks', 'static'),
+    BASE_DIR / "tasks/static",
 ]
 
 
@@ -89,8 +86,7 @@ WSGI_APPLICATION = 'task_managements.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
